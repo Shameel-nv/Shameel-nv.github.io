@@ -370,7 +370,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent, #5cebd1
 
       <div class="portrait-wrap">
         <figure class="portrait" id="portrait">
-          <img src="photo.jpg" alt="Portrait of Muhammed Shameel NV in a navy suit with arms crossed, smiling" width="821" height="896" onerror="document.getElementById('portrait').classList.add('no-img')">
+          <img src="photo.jpeg" alt="Portrait of Muhammed Shameel NV in a navy suit with arms crossed, smiling" width="821" height="896" onerror="document.getElementById('portrait').classList.add('no-img')">
           <span class="fallback" aria-hidden="true">MS</span>
           <span class="scanline" aria-hidden="true"></span>
           <figcaption class="focus-tag"><span class="dot"></span><span id="scanText">Hover to scan this target</span></figcaption>
@@ -984,6 +984,18 @@ const ME = {
   }
 })();
 </script>
+
+<div class="qc-win-overlay" id="qc-win-overlay" role="dialog" aria-modal="true" aria-labelledby="qc-win-title" aria-describedby="qc-win-desc" hidden>
+  <div class="qc-win-box">
+    <div class="qc-win-icon" aria-hidden="true">✓</div>
+    <p class="qc-win-kicker">SECURITY CHALLENGE COMPLETE</p>
+    <h2 id="qc-win-title">Congrats, security pro!</h2>
+    <p id="qc-win-desc">You got every answer right. Great instincts — keep them sharp.</p>
+    <div class="qc-win-score">30 <span>/ 30 XP</span></div>
+    <p class="qc-win-closing">Back to exploring the portfolio in a moment…</p>
+    <button type="button" id="qc-win-close">Continue exploring</button>
+  </div>
+</div>
 
 <script>
 /* Lightweight quality-of-life interactions; original portfolio features remain intact. */
