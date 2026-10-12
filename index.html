@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammed Shameel NV | Penetration Testing & Mobile Security</title>
+<meta name="description" content="Muhammed Shameel NV is an Associate Penetration Tester at Wattlecorp Cybersecurity Labs, Calicut, with CEH v13 certification and a growing focus on mobile application security.">
+<meta property="og:title" content="Muhammed Shameel NV | Penetration Testing & Mobile Security">
+<meta property="og:description" content="Associate Penetration Tester at Wattlecorp Cybersecurity Labs, Calicut. CEH v13 certified; currently learning mobile application security.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312203A'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='%23FF7A59'%3EMS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  // Set theme before paint to avoid a flash. Dark is the default.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+
+<style>
+:root {
+  --bg: #E9EDF1; --surface: #F6F8FA; --ink: #12203A; --muted: #4F5C74; --line: #C7CFDA;
+  --accent: #D9411E; --accent-soft: #F5D9D1; --cool: #1D6FD1;
+  --net-line: #12203A; --net-node: #12203A;
+  --term: #0F1B33; --term-2: #16264A; --term-ink: #DCE6F5; --term-muted: #8FA0BF;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --maxw: 1120px;
+}
+:root[data-theme="dark"] {
+  --bg: #0A1222; --surface: #111B31; --ink: #E8EEF8; --muted: #98A6BF; --line: #22304D;
+  --accent: #FF7A59; --accent-soft: #3A2220; --cool: #6CB6FF;
+  --net-line: #8CC8FF; --net-node: #BFD9F5;
+  --term: #060C19; --term-2: #0F1A33;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font-family: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: min(var(--maxw), 100% - 2.5rem); margin-inline: auto; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--bg); padding: .5rem 1rem; z-index: 100; border-radius: 6px; }
+.skip:focus { left: 8px; }
+
+/* progress bar */
+#progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; z-index: 80; }
+
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 1rem; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; text-decoration: none; letter-spacing: -.02em; }
+.brand span { color: var(--accent); }
+.nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+.nav a.link { text-decoration: none; font-weight: 500; font-size: .98rem; color: var(--muted); padding: .25rem 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+.nav a.link:hover, .nav a.link.active { color: var(--ink); border-color: var(--accent); }
+.theme-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; display: grid; place-items: center; }
+.theme-btn:hover { border-color: var(--ink); }
+.theme-btn svg { width: 18px; height: 18px; }
+@media (max-width: 820px) { .nav ul { display: none; } }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(3rem, 7vw, 5rem); }
+#net { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; pointer-events: none; }
+.hero-grid a, .hero-grid button, .hero-grid .portrait { pointer-events: auto; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.7rem, 7.2vw, 5.6rem); line-height: .98; letter-spacing: -.035em; margin: 0 0 1.25rem; font-variation-settings: "opsz" 96; }
+.typed { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 2.6vw, 1.75rem); line-height: 1.25; margin: 0 0 1.25rem; min-height: 1.3em; }
+.typed::after { content: ""; display: inline-block; width: 3px; height: 1.05em; margin-left: 4px; background: var(--accent); vertical-align: -0.15em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.bio { max-width: 56ch; color: var(--muted); margin: 0 0 1.75rem; }
+.btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .8rem 1.25rem; border-radius: 10px; font-weight: 600; font-size: 1rem; text-decoration: none; border: 1.5px solid var(--ink); cursor: pointer; transition: background .15s, color .15s, transform .12s ease-out; will-change: transform; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn.ghost { background: color-mix(in srgb, var(--bg) 60%, transparent); color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--bg); }
+.hint-line { margin: 1.25rem 0 0; font-size: .92rem; color: var(--muted); font-family: var(--font-mono); }
+
+.portrait-wrap { perspective: 900px; }
+.portrait { position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 28px 28px 28px 140px; overflow: hidden; background: #B9C1C8; box-shadow: 0 0 0 1px var(--line), 0 30px 60px -30px rgba(0,0,0,.5); transition: transform .15s ease-out; transform-style: preserve-3d; cursor: crosshair; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.portrait .fallback { position: absolute; inset: 0; display: none; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 6rem; color: #12203A; }
+.portrait.no-img .fallback { display: grid; }
+.portrait.no-img img { display: none; }
+.scanline { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--accent); box-shadow: 0 0 18px 4px var(--accent); opacity: 0; pointer-events: none; }
+.portrait.scanning .scanline { animation: scan 1.3s ease-in-out forwards; }
+@keyframes scan { 0% { top: 0; opacity: 1; } 95% { opacity: 1; } 100% { top: calc(100% - 3px); opacity: 0; } }
+.focus-tag { position: absolute; left: 14px; bottom: 14px; right: 14px; background: color-mix(in srgb, var(--term) 90%, transparent); color: var(--term-ink); font-family: var(--font-mono); font-size: .78rem; padding: .55rem .8rem; border-radius: 10px; display: flex; align-items: center; gap: .6rem; backdrop-filter: blur(6px); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #4ADE9A; flex: none; }
+.scanning .dot { background: var(--accent); animation: blink .5s steps(1) infinite; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .portrait-wrap { max-width: 340px; order: -1; } }
+
+.hero h1, .hero .typed, .hero .bio, .hero .btn-row, .hero .hint-line, .portrait-wrap { animation: rise .7s cubic-bezier(.2,.7,.2,1) both; }
+.hero .typed { animation-delay: .08s; } .hero .bio { animation-delay: .16s; } .hero .btn-row { animation-delay: .24s; } .hero .hint-line { animation-delay: .32s; } .portrait-wrap { animation-delay: .12s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Sections ---------- */
+section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.025em; line-height: 1.05; margin: 0 0 .75rem; }
+.lede { color: var(--muted); max-width: 60ch; margin: 0 0 2rem; }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Attack surface map ---------- */
+.map-box { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(.5rem, 2vw, 1.25rem); }
+#map { width: 100%; height: auto; display: block; }
+#map .edge { stroke: var(--line); stroke-width: 1.5; fill: none; stroke-dasharray: 400; stroke-dashoffset: 400; transition: stroke .2s, opacity .3s; }
+#map.drawn .edge { stroke-dashoffset: 0; transition: stroke-dashoffset 1.2s ease, stroke .2s, opacity .3s; }
+#map .edge.hot { stroke: var(--accent); stroke-width: 2.5; }
+#map .node { cursor: pointer; transition: opacity .3s; outline: none; }
+#map .node circle.c { fill: var(--surface); stroke: var(--cool); stroke-width: 2; transition: r .15s, fill .15s, stroke .15s; }
+#map .node:hover circle.c, #map .node:focus-visible circle.c, #map .node.sel circle.c { fill: var(--accent); stroke: var(--accent); }
+#map .node text { fill: var(--ink); font-family: var(--font-body); font-size: 14px; font-weight: 500; pointer-events: none; }
+#map .area circle.c { fill: var(--ink); stroke: var(--ink); }
+#map .area text { fill: var(--bg); font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+#map .area:hover circle.c, #map .area:focus-visible circle.c, #map .area.sel circle.c { fill: var(--accent); stroke: var(--accent); }
+#map .area:hover text, #map .area.sel text { fill: #fff; }
+#map .core circle.c { fill: var(--accent); stroke: var(--accent); }
+#map .core text { fill: #fff; font-family: var(--font-display); font-weight: 800; font-size: 18px; }
+#map .pulse { fill: none; stroke: var(--accent); stroke-width: 2; opacity: 0; animation: pulse 2.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.4); opacity: 0; } }
+#map .dim { opacity: .18; }
+.detail { margin-top: 1rem; padding: 1.1rem 1.25rem; border-radius: 14px; background: var(--bg); border: 1px dashed var(--line); min-height: 92px; }
+.detail h3 { margin: 0 0 .25rem; font-family: var(--font-display); font-size: 1.25rem; display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+.detail .tag { font-family: var(--font-body); font-size: .8rem; font-weight: 600; padding: .1rem .6rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+.detail p { margin: 0; color: var(--muted); max-width: 70ch; }
+.map-ctl { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.chip { padding: .45rem 1rem; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-weight: 600; font-size: .95rem; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+@media (max-width: 700px) { #map .node:not(.area):not(.core) text { display: none; } }
+
+/* ---------- Terminal ---------- */
+.term { background: var(--term); color: var(--term-ink); border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--term-ink) 14%, transparent); box-shadow: 0 30px 60px -30px rgba(5, 10, 25, .6); font-family: var(--font-mono); font-size: .88rem; }
+.term-bar { display: flex; align-items: center; gap: .75rem; padding: .65rem 1rem; background: var(--term-2); border-bottom: 1px solid color-mix(in srgb, var(--term-ink) 12%, transparent); color: var(--term-muted); font-size: .8rem; }
+.term-bar .lights { display: flex; gap: 6px; } .term-bar .lights i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.term-bar .lights i:nth-child(1) { background: #FF6B6B; } .term-bar .lights i:nth-child(2) { background: #F2C879; } .term-bar .lights i:nth-child(3) { background: #4ADE9A; }
+.term-out { height: 360px; overflow-y: auto; padding: 1rem 1.1rem .25rem; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.65; scrollbar-width: thin; }
+.term-out .ln { display: block; }
+.term-out .p { color: var(--cool); }
+.term-out .ok { color: #4ADE9A; } .term-out .bad { color: #FF7A7A; } .term-out .dim { color: var(--term-muted); } .term-out .hot { color: var(--accent); } .term-out .y { color: #F2C879; }
+.term-out a { color: #F2C879; text-underline-offset: 3px; }
+.term-in { display: flex; gap: .6rem; align-items: center; padding: .4rem 1.1rem .9rem; }
+.term-in label { color: var(--cool); white-space: nowrap; }
+.term-in input { flex: 1; min-width: 0; background: transparent; border: 0; color: var(--term-ink); font: inherit; outline: none; caret-color: var(--accent); }
+.term-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.term-chips button { font-family: var(--font-mono); font-size: .82rem; padding: .35rem .75rem; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.term-chips button:hover { border-color: var(--accent); color: var(--accent); }
+.challenge { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; padding: 1rem 1.25rem; border-radius: 14px; border: 1px dashed var(--accent); background: var(--accent-soft); color: var(--ink); margin-bottom: 1.25rem; }
+:root[data-theme="dark"] .challenge { color: var(--ink); }
+.challenge strong { font-family: var(--font-display); font-size: 1.1rem; }
+.challenge p { margin: .15rem 0 0; font-size: .98rem; }
+.challenge .chip { margin-left: auto; background: var(--bg); }
+.secret { margin-top: 1.5rem; padding: 1.5rem; border-radius: 16px; background: var(--ink); color: var(--bg); display: none; }
+.secret.show { display: block; animation: rise .6s both; }
+.secret h3 { font-family: var(--font-display); margin: 0 0 .4rem; font-size: 1.5rem; }
+.secret p { margin: 0 0 1rem; opacity: .85; max-width: 60ch; }
+.secret .btn { border-color: var(--bg); } .secret .btn.primary { background: var(--bg); color: var(--ink); }
+.confetti { position: fixed; top: -12px; width: 9px; height: 14px; z-index: 200; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translate(var(--dx), 105vh) rotate(var(--rot)); opacity: .9; } }
+
+/* ---------- Timeline + learning ---------- */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 1.4rem; border-left: 2px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 1.75rem 1rem; }
+.timeline li::before { content: ""; position: absolute; left: -2.15rem; top: .35rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+.timeline h3 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.timeline .when { font-size: .9rem; color: var(--accent); font-weight: 600; }
+.timeline p { margin: .25rem 0 0; color: var(--muted); }
+.learning { list-style: none; padding: 0; margin: 0; }
+.learning li { padding: .95rem 0; border-bottom: 1px solid var(--line); }
+.learning li:first-child { border-top: 1px solid var(--line); }
+.learning .row { display: flex; justify-content: space-between; gap: 1rem; font-weight: 500; margin-bottom: .5rem; }
+.learning .row span:last-child { color: var(--muted); font-family: var(--font-mono); font-size: .88rem; }
+.meter { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--accent); width: 0; border-radius: 99px; transition: width 1.2s cubic-bezier(.2,.7,.2,1); }
+.group + .group { margin-top: 1.25rem; }
+.group h3 { font-family: var(--font-display); font-size: 1.1rem; margin: 0 0 .5rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 0; list-style: none; }
+.chips li { padding: .35rem .8rem; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); font-size: .95rem; font-weight: 500; transition: transform .15s, border-color .15s; }
+.chips li:hover { transform: translateY(-3px) rotate(-1.5deg); border-color: var(--accent); }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ---------- Write-ups ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+.card { display: flex; flex-direction: column; gap: .6rem; padding: 1.4rem; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; transition: border-color .15s, transform .2s, opacity .25s; transform-style: preserve-3d; }
+.card:hover { border-color: var(--accent); }
+.card.gone { display: none; }
+.card h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.2; letter-spacing: -.01em; }
+.card p { margin: 0; color: var(--muted); font-size: .98rem; }
+.card .meta { margin-top: auto; padding-top: .5rem; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; font-size: .85rem; color: var(--muted); }
+.sev { padding: .1rem .55rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: .8rem; }
+.sample { padding: .1rem .55rem; border-radius: 6px; border: 1px dashed var(--muted); font-size: .8rem; }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--ink); color: var(--bg); border-radius: 24px; padding: clamp(2rem, 5vw, 4rem); display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: end; }
+.contact h2 { color: var(--bg); font-size: clamp(2rem, 5vw, 3.4rem); margin: 0; }
+.contact p { margin: .75rem 0 0; opacity: .8; max-width: 44ch; }
+.contact .btn { border-color: var(--bg); } .contact .btn.primary { background: var(--bg); color: var(--ink); }
+.contact .btn.ghost { color: var(--bg); background: transparent; } .contact .btn.ghost:hover { background: var(--bg); color: var(--ink); }
+.contact .btn-row { flex-direction: column; align-items: stretch; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; align-items: start; } }
+footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .92rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  #map .edge { stroke-dashoffset: 0; }
+}
+</style>
+</head>
+
+<body>
+<div id="progress" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Muhammed Shameel NV, home">shameel<span>.</span></a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a class="link" href="#surface">Skills</a></li>
+        <li><a class="link" href="#terminal">Terminal</a></li>
+        <li><a class="link" href="#journey">Journey</a></li>
+        <li><a class="link" href="#writeups">Write-ups</a></li>
+        <li><a class="link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero" id="top">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Muhammed Shameel NV</h1>
+        <p class="typed" id="typed" aria-label="Associate Penetration Tester">Associate Penetration Tester</p>
+        <p class="bio">
+          I work in cybersecurity at Wattlecorp Cybersecurity Labs, Calicut. I hold the CEH v13 certification and am building my skills in web and API security, with a focused learning path into mobile application security. I value careful testing, clear reports, and learning by doing.
+        </p>
+        <div class="btn-row">
+          <a class="btn primary magnet" href="#surface">Explore my skills</a>
+          <a class="btn ghost magnet" data-link="linkedin" href="https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.55h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.55 4.77 5.87V21h-4v-5.07c0-1.2-.02-2.76-1.75-2.76-1.75 0-2.02 1.32-2.02 2.67V21h-4z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn ghost magnet" data-link="github" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <p class="hint-line">Ethical testing · Practical learning · Mobile security in focus</p>
+      </div>
+
+      <div class="portrait-wrap">
+        <figure class="portrait" id="portrait">
+          <img src="photo.jpeg" alt="Portrait of Muhammed Shameel NV" width="821" height="896" onerror="document.getElementById('portrait').classList.add('no-img')">
+          <span class="fallback" aria-hidden="true">MS</span>
+          <span class="scanline" aria-hidden="true"></span>
+          <figcaption class="focus-tag"><span class="dot"></span><span id="scanText">Hover to scan this target</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ATTACK SURFACE MAP ================= -->
+  <section id="surface" aria-labelledby="surface-h">
+    <div class="wrap">
+      <h2 id="surface-h">Security areas I’m exploring</h2>
+      <p class="lede">Explore the security topics I work with and the areas I’m actively learning. This map reflects my interests and learning path—not a claim of expertise in every topic.</p>
+      <div class="map-box reveal">
+        <div class="map-ctl" id="mapCtl" role="group" aria-label="Filter the map"></div>
+        <svg id="map" viewBox="0 0 900 640" role="group" aria-label="Interactive map of my testing skills"></svg>
+        <div class="detail" id="detail" aria-live="polite">
+          <h3>Pick a node</h3>
+          <p>Each skill on the map has a short note on how I test it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TERMINAL ================= -->
+  <section id="terminal" aria-labelledby="terminal-h">
+    <div class="wrap">
+      <h2 id="terminal-h">Explore my security terminal</h2>
+      <p class="lede">An interactive, simulated terminal with a few commands to explore my profile, skills, and learning goals.</p>
+
+      <div class="challenge reveal">
+        <div>
+          <strong>Mini challenge</strong>
+          <p>There is a hidden file in this terminal. Find it, decode what is inside, and run <code>unlock &lt;passphrase&gt;</code> to open a surprise.</p>
+        </div>
+        <button class="chip" id="hintBtn" type="button">Give me a hint</button>
+      </div>
+
+      <div class="term reveal" id="term">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>visitor@shameel: ~</span></div>
+        <div class="term-out" id="termOut" role="log" aria-live="polite" aria-label="Terminal output"></div>
+        <form class="term-in" id="termForm" autocomplete="off">
+          <label for="termInput">visitor@shameel:~$</label>
+          <input id="termInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type a command">
+        </form>
+      </div>
+      <div class="term-chips" id="termChips" aria-label="Command shortcuts"></div>
+
+      <div class="secret" id="secret" role="status">
+        <h3>Flag captured. Nice work.</h3>
+        <p>That habit of poking at things until they open up is exactly what I bring to a security test. Let's talk.</p>
+        <div class="btn-row">
+          <a class="btn primary" data-link="linkedin" href="#" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
+          <a class="btn ghost" id="secretMail" href="#" hidden>Send an email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JOURNEY + LEARNING ================= -->
+  <section id="journey" aria-labelledby="journey-h">
+    <div class="wrap two-col">
+      <div class="reveal">
+        <h2 id="journey-h">Journey</h2>
+        <p class="lede">How I got here, and where I am headed.</p>
+        <ul class="timeline" id="timeline"></ul>
+      </div>
+      <div class="reveal">
+        <h2>Learning now</h2>
+        <p class="lede">Honest, current progress.</p>
+        <ul class="learning" id="learningList"></ul>
+        <div style="margin-top:2rem" id="toolGroups"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WRITE-UPS ================= -->
+  <section id="writeups" aria-labelledby="writeups-h">
+    <div class="wrap">
+      <h2 id="writeups-h">Lab notes & write-ups</h2>
+      <p class="lede">A growing knowledge base. These cards are placeholders until I publish real, reproducible write-ups—no client details or confidential findings.</p>
+      <div class="map-ctl" id="wuFilter" role="group" aria-label="Filter write-ups"></div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div>
+          <h2 id="contact-h">Let’s talk security.</h2>
+          <p>I’m interested in learning opportunities, mobile application security, responsible research, and conversations with the cybersecurity community.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary magnet" data-link="linkedin" href="https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
+          <a class="btn ghost magnet" id="emailBtn" href="#" hidden>Send an email</a>
+          <a class="btn ghost magnet" data-link="github" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener noreferrer">See my GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Muhammed Shameel NV</span>
+    <span>CEH v13 · Wattlecorp Cybersecurity Labs, Calicut · Mobile security learning journey</span>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT THIS BLOCK. Everything dynamic on the page comes from here.
+   ===================================================================== */
+const ME = {
+  name: "Muhammed Shameel NV",
+  linkedin: "https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360",
+  github: "https://github.com/YOUR-USERNAME",   // TODO: replace with your actual GitHub profile URL
+  email: "",                                     // EDIT: "you@example.com" (empty hides the email buttons)
+  passphrase: "hire-shameel",                    // the CTF answer (visitors must base64-decode it)
+
+  roles: ["Associate Penetration Tester", "CEH v13 Certified", "Mobile Application Security Learner", "Web & API Security", "Always learning"],
+
+  // EDIT: honest progress, 0-100
+  learning: [
+    { topic: "Mobile application security fundamentals", progress: 30 },
+    { topic: "Android app assessment and testing workflow", progress: 25 },
+    { topic: "Web and API security testing", progress: 50 },
+    { topic: "Mobile traffic analysis and proxying", progress: 20 }
+  ],
+
+  // EDIT: the tools you actually use
+  tools: {
+    "Web and API security": ["Burp Suite", "OWASP ZAP", "Postman"],
+    "Mobile security — learning": ["Android security concepts", "APK analysis fundamentals", "Proxy-based traffic inspection"],
+    "Core foundations": ["Linux", "Networking", "Python basics"]
+  },
+
+  // Journey is shown in reverse chronological order. Add dates when you want to include them.
+  journey: [
+    { when: "Current", title: "Wattlecorp Cybersecurity Labs · Calicut", text: "Currently working at Wattlecorp Cybersecurity Labs, building practical experience in cybersecurity and penetration testing." },
+    { when: "Certification", title: "Certified Ethical Hacker (CEH v13)", text: "Earned the CEH v13 certification as part of my cybersecurity learning and professional development." },
+    { when: "Certification", title: "Certified Penetration Tester · Redteam Hacking Academy", text: "Completed training at Redteam Hacking Academy and earned the Certified Penetration Tester certificate." },
+    { when: "Education", title: "B.Sc. Computer Science · JDT College of Arts and Science, Calicut", text: "Studied Computer Science, building the academic foundation for my path into cybersecurity." },
+    { when: "Learning focus", title: "Mobile Application Security", text: "Currently focused on learning mobile application security, especially Android app testing, alongside web and API security. Mobile security is my learning goal—not a claim of established expertise." }
+  ],
+
+  // EDIT: replace the samples with your real write-ups. Delete `sample: true` once real.
+  writeups: [
+    { title: "Mobile security lab notes", summary: "A place for future notes on Android app structure, permissions, exported components, and secure storage. Publish only after completing the lab and writing your own findings.", tag: "Mobile", severity: "", url: "#", sample: true },
+    { title: "Web application security notes", summary: "A future write-up area for authorized practice labs, including the issue, evidence, impact, and remediation.", tag: "Web", severity: "", url: "#", sample: true },
+    { title: "API security lab notes", summary: "A future space for documenting API testing methodology and fixes from authorized labs.", tag: "API", severity: "", url: "#", sample: true }
+  ],
+
+  // Skill map. Edit names and notes freely.
+  areas: [
+    { id: "web", label: "Web", skills: [
+      ["Injection", "Checking whether user input can reach a database, shell, template or the browser unfiltered: SQL injection, command injection and cross-site scripting."],
+      ["Access control", "Changing IDs, roles and paths to see if one user can read or modify another user's data or reach admin functions."],
+      ["Auth and sessions", "Login, reset and MFA flows, session fixation, cookie flags, and what happens when tokens are replayed or never expire."],
+      ["SSRF", "Making the server fetch URLs for me, to reach internal services or cloud metadata that should never be exposed."],
+      ["File upload", "Testing what the app accepts, where it stores it, and whether a crafted path or file type breaks out of the intended folder."],
+      ["Business logic", "Abusing the intended workflow: skipping steps, replaying coupons, racing payments. Scanners miss these, so I test them by hand."]
+    ]},
+    { id: "api", label: "API", skills: [
+      ["BOLA / IDOR", "Swapping object IDs between accounts to confirm the API checks ownership on every request, not just at login."],
+      ["JWT and tokens", "Weak signing, algorithm confusion, missing expiry and tokens that stay valid after logout or password change."],
+      ["Mass assignment", "Adding fields like role or isAdmin to a request body to see whether the API binds them blindly."],
+      ["Data exposure", "Comparing what the response returns against what the client actually needs. Hidden fields often leak."],
+      ["Rate limiting", "Testing login, OTP and search endpoints for brute force, enumeration and resource exhaustion."],
+      ["Shadow endpoints", "Finding old versions and undocumented routes that skipped the security fixes applied to the current API."]
+    ]},
+    { id: "mobile", label: "Mobile", skills: [
+      ["App permissions", "Learning to review Android permissions and assess whether access requested by an app is justified."],
+      ["Local data storage", "Studying how apps store sensitive data and how to identify insecure storage in authorized test apps."],
+      ["Network traffic", "Learning to inspect mobile app traffic through a proxy in a controlled lab and understand TLS protections."],
+      ["App components", "Exploring Android activities, services, receivers, and providers for unsafe exposure or configuration."],
+      ["APK analysis", "Building familiarity with APK structure, manifests, resources, and static-analysis workflows."],
+      ["Mobile OWASP risks", "Studying common mobile application risks and mapping lab observations to practical remediation advice."]
+    ]}
+  ]
+};
+
+/* =====================================================================
+   Page logic. You should not need to edit below this line.
+   ===================================================================== */
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const root = document.documentElement;
+  const NS = "http://www.w3.org/2000/svg";
+
+  /* ---------- links, year ---------- */
+  $$('[data-link="linkedin"]').forEach(a => a.href = ME.linkedin);
+  $$('[data-link="github"]').forEach(a => a.href = ME.github);
+  if (ME.email) { ["#emailBtn", "#secretMail"].forEach(s => { const e = $(s); e.href = "mailto:" + ME.email; e.hidden = false; }); }
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ---------- theme ---------- */
+  let colors = {};
+  function readColors() {
+    const cs = getComputedStyle(root);
+    colors = { line: cs.getPropertyValue("--net-line").trim(), node: cs.getPropertyValue("--net-node").trim(), hot: cs.getPropertyValue("--accent").trim() };
+  }
+  $("#themeBtn").addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    readColors(); if (reduce) drawStatic();
+  });
+
+  /* ---------- scroll progress + active nav ---------- */
+  const bar = $("#progress");
+  const navLinks = $$(".nav a.link");
+  const sections = navLinks.map(a => $(a.getAttribute("href")));
+  function onScroll() {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+    let cur = -1;
+    sections.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * .4) cur = i; });
+    navLinks.forEach((a, i) => a.classList.toggle("active", i === cur));
+  }
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ---------- reveal on scroll ---------- */
+  if ("IntersectionObserver" in window && !reduce) {
+    const io = new IntersectionObserver(en => en.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+    $$(".reveal").forEach(el => io.observe(el));
+  } else { $$(".reveal").forEach(el => el.classList.add("in")); }
+
+  /* ---------- typed roles ---------- */
+  const typed = $("#typed");
+  if (reduce) { typed.textContent = ME.roles[0]; }
+  else {
+    let ri = 0, ci = 0, del = false;
+    (function tick() {
+      const word = ME.roles[ri];
+      ci += del ? -1 : 1;
+      typed.textContent = word.slice(0, ci);
+      let wait = del ? 28 : 65;
+      if (!del && ci === word.length) { wait = 1700; del = true; }
+      else if (del && ci === 0) { del = false; ri = (ri + 1) % ME.roles.length; wait = 350; }
+      setTimeout(tick, wait);
+    })();
+    typed.textContent = "";
+  }
+
+  /* ---------- magnetic buttons ---------- */
+  if (!reduce) {
+    $$(".magnet").forEach(b => {
+      b.addEventListener("mousemove", e => {
+        const r = b.getBoundingClientRect();
+        b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .28}px)`;
+      });
+      b.addEventListener("mouseleave", () => b.style.transform = "");
+    });
+  }
+
+  /* ---------- portrait tilt + scan ---------- */
+  const portrait = $("#portrait"), scanText = $("#scanText");
+  let scanTimer;
+  if (!reduce) {
+    portrait.addEventListener("mousemove", e => {
+      const r = portrait.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      portrait.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+    });
+    portrait.addEventListener("mouseleave", () => portrait.style.transform = "");
+  }
+  function startScan() {
+    if (portrait.classList.contains("scanning")) return;
+    portrait.classList.add("scanning"); scanText.textContent = "Scanning target...";
+    clearTimeout(scanTimer);
+    scanTimer = setTimeout(() => {
+      portrait.classList.remove("scanning");
+      scanText.textContent = "Scan complete: 0 weaknesses found";
+    }, reduce ? 0 : 1350);
+  }
+  portrait.addEventListener("mouseenter", startScan);
+  portrait.addEventListener("click", startScan);
+  portrait.addEventListener("mouseleave", () => { setTimeout(() => { if (!portrait.classList.contains("scanning")) scanText.textContent = "Hover to scan this target"; }, 2200); });
+
+  /* ---------- hero network canvas ---------- */
+  const hero = $("#top"), cv = $("#net"), ctx = cv.getContext("2d");
+  let W = 0, H = 0, nodes = [], pings = [], mouse = { x: -9999, y: -9999 }, heroVisible = true;
+  const LINK = 135, RADIUS = 170;
+  readColors();
+  function resize() {
+    const r = hero.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.max(28, Math.min(95, Math.round(W * H / 14000)));
+    nodes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35, r: 1.4 + Math.random() * 1.6 }));
+    if (reduce) drawStatic();
+  }
+  function frame(move) {
+    ctx.clearRect(0, 0, W, H);
+    for (const n of nodes) {
+      if (move) { n.x += n.vx; n.y += n.vy; if (n.x < 0 || n.x > W) n.vx *= -1; if (n.y < 0 || n.y > H) n.vy *= -1; }
+    }
+    ctx.lineWidth = 1;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+        if (d < LINK) {
+          const mx = (a.x + b.x) / 2 - mouse.x, my = (a.y + b.y) / 2 - mouse.y;
+          const near = Math.hypot(mx, my) < RADIUS;
+          ctx.globalAlpha = (1 - d / LINK) * (near ? .95 : .28);
+          ctx.strokeStyle = near ? colors.hot : colors.line;
+          ctx.lineWidth = near ? 1.6 : 1;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    for (const n of nodes) {
+      const near = Math.hypot(n.x - mouse.x, n.y - mouse.y) < RADIUS;
+      ctx.globalAlpha = near ? 1 : .55;
+      ctx.fillStyle = near ? colors.hot : colors.node;
+      ctx.beginPath(); ctx.arc(n.x, n.y, near ? n.r + 1.4 : n.r, 0, 6.283); ctx.fill();
+    }
+    for (let i = pings.length - 1; i >= 0; i--) {
+      const p = pings[i]; p.r += 5; p.a -= .014;
+      if (p.a <= 0) { pings.splice(i, 1); continue; }
+      ctx.globalAlpha = p.a; ctx.strokeStyle = colors.hot; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function drawStatic() { frame(false); }
+  function loop() { if (heroVisible && !document.hidden) frame(true); requestAnimationFrame(loop); }
+  hero.addEventListener("pointermove", e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  hero.addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+  hero.addEventListener("pointerdown", e => {
+    if (e.target.closest("a, button")) return;
+    const r = hero.getBoundingClientRect(); pings.push({ x: e.clientX - r.left, y: e.clientY - r.top, r: 4, a: .9 });
+    if (reduce) drawStatic();
+  });
+  if ("IntersectionObserver" in window) new IntersectionObserver(en => heroVisible = en[0].isIntersecting).observe(hero);
+  addEventListener("resize", resize); resize();
+  if (!reduce) requestAnimationFrame(loop);
+
+  /* ---------- attack surface map ---------- */
+  const map = $("#map"), detail = $("#detail"), ctl = $("#mapCtl");
+  const CX = 450, CY = 330, AR = 150, SR = 150, SX = 1.45;
+  const mk = (tag, attrs, parent) => { const el = document.createElementNS(NS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); (parent || map).appendChild(el); return el; };
+  const edges = [], nodeEls = [];
+  const angles = [-90, 30, 150];
+  const edgeLayer = mk("g", {}), nodeLayer = mk("g", {});
+
+  ME.areas.forEach((area, ai) => {
+    const a = angles[ai] * Math.PI / 180;
+    const ax = CX + Math.cos(a) * AR * SX, ay = CY + Math.sin(a) * AR;
+    area._x = ax; area._y = ay;
+    const e0 = mk("path", { class: "edge", d: `M${CX},${CY} L${ax},${ay}`, "data-area": area.id }, edgeLayer);
+    edges.push(e0);
+    const n = area.skills.length, spread = 150 * Math.PI / 180;
+    area.skills.forEach((sk, si) => {
+      const ang = a - spread / 2 + spread * (si / (n - 1));
+      const sx = ax + Math.cos(ang) * SR * SX * .95, sy = ay + Math.sin(ang) * SR * .95;
+      const e = mk("path", { class: "edge", d: `M${ax},${ay} L${sx},${sy}`, "data-area": area.id }, edgeLayer);
+      edges.push(e);
+      const g = mk("g", { class: "node", tabindex: 0, role: "button", "aria-label": `${sk[0]}: ${area.label}`, "data-area": area.id }, nodeLayer);
+      mk("circle", { class: "c", cx: sx, cy: sy, r: 9 }, g);
+      const right = Math.cos(ang) >= 0;
+      const t = mk("text", { x: sx + (right ? 15 : -15), y: sy + 5, "text-anchor": right ? "start" : "end" }, g);
+      t.textContent = sk[0];
+      const show = () => { setSel(g); detail.innerHTML = `<h3>${esc(sk[0])} <span class="tag">${esc(area.label)}</span></h3><p>${esc(sk[1])}</p>`; e.classList.add("hot"); e0.classList.add("hot"); };
+      const hide = () => { e.classList.remove("hot"); e0.classList.remove("hot"); };
+      g.addEventListener("mouseenter", show); g.addEventListener("focus", show); g.addEventListener("click", show);
+      g.addEventListener("mouseleave", hide); g.addEventListener("blur", hide);
+      nodeEls.push(g);
+    });
+    const ag = mk("g", { class: "node area", tabindex: 0, role: "button", "aria-label": `${area.label} testing area`, "data-area": area.id }, nodeLayer);
+    mk("circle", { class: "c", cx: ax, cy: ay, r: 30 }, ag);
+    const at = mk("text", { x: ax, y: ay + 5, "text-anchor": "middle" }, ag); at.textContent = area.label;
+    const pick = () => { setFilter(area.id); detail.innerHTML = `<h3>${esc(area.label)} <span class="tag">Area</span></h3><p>${area.skills.length} things I test here. Hover or tap any node around it.</p>`; };
+    ag.addEventListener("click", pick);
+    ag.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+    nodeEls.push(ag);
+  });
+  const core = mk("g", { class: "node core", role: "img", "aria-label": "Muhammed Shameel NV" }, nodeLayer);
+  mk("circle", { class: "pulse", cx: CX, cy: CY, r: 42 }, core);
+  mk("circle", { class: "c", cx: CX, cy: CY, r: 42 }, core);
+  const ct = mk("text", { x: CX, y: CY + 6, "text-anchor": "middle" }, core); ct.textContent = "Shameel";
+
+  function setSel(g) { nodeEls.forEach(n => n.classList.remove("sel")); g.classList.add("sel"); }
+  let filter = "all";
+  function setFilter(id) {
+    filter = id;
+    $$("#mapCtl .chip").forEach(c => c.setAttribute("aria-pressed", c.dataset.id === id));
+    nodeEls.forEach(n => n.classList.toggle("dim", id !== "all" && n.dataset.area !== id));
+    edges.forEach(e => e.classList.toggle("dim", id !== "all" && e.dataset.area !== id));
+    if (id === "all") detail.innerHTML = "<h3>Pick a node</h3><p>Each skill on the map has a short note on how I test it.</p>";
+  }
+  [{ id: "all", label: "Everything" }].concat(ME.areas).forEach(a => {
+    const c = document.createElement("button");
+    c.type = "button"; c.className = "chip"; c.dataset.id = a.id; c.textContent = a.label; c.setAttribute("aria-pressed", a.id === "all");
+    c.addEventListener("click", () => setFilter(a.id));
+    ctl.appendChild(c);
+  });
+  if ("IntersectionObserver" in window && !reduce) {
+    new IntersectionObserver((en, ob) => { if (en[0].isIntersecting) { map.classList.add("drawn"); ob.disconnect(); } }, { threshold: .25 }).observe(map);
+  } else map.classList.add("drawn");
+
+  /* ---------- terminal ---------- */
+  const out = $("#termOut"), form = $("#termForm"), input = $("#termInput");
+  const history = []; let hi = 0;
+  const secretB64 = btoa(ME.passphrase);
+  let unlocked = false;
+
+  const line = (html, cls) => { const d = document.createElement("span"); d.className = "ln " + (cls || ""); d.innerHTML = html; out.appendChild(d); };
+  const lines = (arr) => arr.forEach(l => line(l));
+  const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t || u)}</a>`;
+
+  const files = {
+    "about.txt": () => ["Muhammed Shameel NV — Associate Penetration Tester.", "CEH v13 certified; currently at Wattlecorp Cybersecurity Labs, Calicut.", "Current learning focus: mobile application security, alongside web and API security."],
+    "skills.txt": () => ME.areas.map(a => `<span class="hot">${esc(a.label)}</span>: ${esc(a.skills.map(s => s[0]).join(", "))}`),
+    "contact.txt": () => contactLines()
+  };
+  const hiddenFile = ".secret";
+  function contactLines() {
+    const r = [`LinkedIn: ${link(ME.linkedin)}`, `GitHub:   ${link(ME.github)}`];
+    if (ME.email) r.push(`Email:    ${link("mailto:" + ME.email, ME.email)}`);
+    return r;
+  }
+  const commands = {
+    help: () => [
+      `<span class="y">Commands</span>`,
+      "  whoami           who I am",
+      "  skills           what I test",
+      "  learning         what I am studying",
+      "  tools            what I use",
+      "  contact          how to reach me",
+      "  ls [-a]          list files",
+      "  cat &lt;file&gt;      read a file",
+      "  theme            switch light/dark",
+      "  clear            clear the screen",
+      `<span class="dim">Try anything else you would type on a Linux box.</span>`
+    ],
+    whoami: () => files["about.txt"](),
+    about: () => files["about.txt"](),
+    skills: () => files["skills.txt"](),
+    learning: () => ME.learning.map(l => `${esc(l.topic).padEnd(54, " ")} <span class="ok">${l.progress}%</span>`),
+    tools: () => Object.entries(ME.tools).map(([g, t]) => `<span class="hot">${esc(g)}</span>: ${esc(t.join(", "))}`),
+    contact: () => contactLines(),
+    ls: (args) => {
+      const all = args.includes("-a") || args.includes("-la") || args.includes("-al");
+      const names = Object.keys(files).concat(all ? [hiddenFile] : []);
+      return [names.map(n => n === hiddenFile ? `<span class="hot">${n}</span>` : n).join("   ")];
+    },
+    cat: (args) => {
+      const f = args[0];
+      if (!f) return [`<span class="bad">cat: missing file name</span>`];
+      if (files[f]) return files[f]();
+      if (f === hiddenFile) return [`<span class="y">${esc(secretB64)}</span>`, `<span class="dim">That looks encoded. Decode it, then run: unlock &lt;passphrase&gt;</span>`];
+      return [`<span class="bad">cat: ${esc(f)}: No such file or directory</span>`];
+    },
+    unlock: (args) => {
+      if (!args.length) return [`usage: unlock &lt;passphrase&gt;`];
+      if (args.join(" ").trim().toLowerCase() === ME.passphrase.toLowerCase()) { win(); return [`<span class="ok">Passphrase accepted. Access granted.</span>`, `<span class="ok">Scroll down: something just opened.</span>`]; }
+      return [`<span class="bad">Access denied.</span> <span class="dim">Hint: base64 is your friend.</span>`];
+    },
+    theme: () => { $("#themeBtn").click(); return [`Theme switched to ${root.dataset.theme}.`]; },
+    date: () => [new Date().toString()],
+    echo: (args) => [esc(args.join(" "))],
+    pwd: () => ["/home/visitor"],
+    id: () => ["uid=1000(visitor) gid=1000(visitor) groups=1000(visitor)"],
+    uname: () => ["Linux shameel 6.8.0-portfolio x86_64 GNU/Linux"],
+    sudo: () => [`<span class="bad">visitor is not in the sudoers file. This incident will be reported.</span>`, `<span class="dim">Nice try.</span>`],
+    rm: () => [`<span class="bad">rm: permission denied.</span> <span class="dim">I hoped you would not try that.</span>`],
+    nmap: () => [
+      "Starting Nmap against shameel.local ...",
+      `PORT     STATE  SERVICE`,
+      `22/tcp   <span class="bad">closed</span> ssh`,
+      `80/tcp   <span class="ok">open</span>   http   (static HTML, no trackers)`,
+      `443/tcp  <span class="ok">open</span>   https  (HSTS on)`,
+      `<span class="dim">Nothing interesting. Well-hardened.</span>`
+    ],
+    ping: () => ["64 bytes from shameel: icmp_seq=1 ttl=64 time=0.042 ms", `<span class="dim">Replies faster than my coffee kicks in.</span>`],
+    hint: () => ["Run ls -a, read the hidden file, decode it, then use unlock."],
+    exit: () => [`<span class="dim">There is no escape. Try "contact" instead.</span>`]
+  };
+
+  function run(raw) {
+    const text = raw.trim();
+    line(`<span class="p">visitor@shameel:~$</span> ${esc(text)}`);
+    if (!text) return;
+    history.push(text); hi = history.length;
+    const parts = text.split(/\s+/), cmd = parts[0].toLowerCase(), args = parts.slice(1);
+    if (cmd === "clear") { out.innerHTML = ""; return; }
+    if (cmd === "history") { lines(history.map((h, i) => `${String(i + 1).padStart(3)}  ${esc(h)}`)); }
+    else if (commands[cmd]) { lines(commands[cmd](args)); }
+    else line(`<span class="bad">${esc(cmd)}: command not found.</span> <span class="dim">Type help.</span>`);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  form.addEventListener("submit", e => { e.preventDefault(); run(input.value); input.value = ""; out.scrollTop = out.scrollHeight; });
+  input.addEventListener("keydown", e => {
+    if (e.key === "ArrowUp") { e.preventDefault(); if (hi > 0) { hi--; input.value = history[hi]; } }
+    else if (e.key === "ArrowDown") { e.preventDefault(); if (hi < history.length - 1) { hi++; input.value = history[hi]; } else { hi = history.length; input.value = ""; } }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      const v = input.value.toLowerCase(), pool = Object.keys(commands).concat(Object.keys(files));
+      const m = pool.filter(c => c.startsWith(v.split(/\s+/).pop()));
+      if (m.length === 1) { const p = input.value.split(/\s+/); p[p.length - 1] = m[0]; input.value = p.join(" "); }
+    }
+  });
+  $("#term").addEventListener("click", () => { if (!getSelection().toString()) input.focus({ preventScroll: true }); });
+
+  const chipBox = $("#termChips");
+  ["help", "whoami", "skills", "learning", "ls -a", "contact", "nmap"].forEach(c => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = c;
+    b.addEventListener("click", () => { run(c); });
+    chipBox.appendChild(b);
+  });
+  $("#hintBtn").addEventListener("click", () => { run("hint"); $("#term").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }); });
+
+  lines([
+    `<span class="y">Welcome, visitor.</span> You are connected to shameel.local`,
+    `Type <span class="hot">help</span> to see what you can do. Press Tab to autocomplete, arrow keys for history.`,
+    ""
+  ]);
+
+  function win() {
+    if (unlocked) return; unlocked = true;
+    $("#secret").classList.add("show");
+    setTimeout(() => $("#secret").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }), 250);
+    if (reduce) return;
+    const palette = [colors.hot, "#6CB6FF", "#F2C879", "#4ADE9A", "#C9A7FF"];
+    for (let i = 0; i < 70; i++) {
+      const c = document.createElement("i"); c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw"; c.style.background = palette[i % palette.length];
+      c.style.setProperty("--dx", (Math.random() * 200 - 100) + "px"); c.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+      c.style.animationDuration = 1.8 + Math.random() * 1.6 + "s"; c.style.animationDelay = Math.random() * .4 + "s";
+      document.body.appendChild(c); setTimeout(() => c.remove(), 4200);
+    }
+  }
+
+  /* ---------- journey ---------- */
+  $("#timeline").innerHTML = ME.journey.map(j => `<li><span class="when">${esc(j.when)}</span><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p></li>`).join("");
+
+  /* ---------- learning + tools ---------- */
+  const ll = $("#learningList");
+  ll.innerHTML = ME.learning.map(l => `<li><div class="row"><span>${esc(l.topic)}</span><span>${l.progress}%</span></div><div class="meter" role="img" aria-label="${l.progress} percent"><i data-w="${l.progress}"></i></div></li>`).join("");
+  const fill = () => $$("i[data-w]", ll).forEach(i => i.style.width = i.dataset.w + "%");
+  if ("IntersectionObserver" in window && !reduce) new IntersectionObserver((en, ob) => { if (en[0].isIntersecting) { fill(); ob.disconnect(); } }, { threshold: .4 }).observe(ll);
+  else fill();
+  $("#toolGroups").innerHTML = Object.entries(ME.tools).map(([g, items]) =>
+    `<div class="group"><h3>${esc(g)}</h3><ul class="chips">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`).join("");
+
+  /* ---------- write-ups with filter ---------- */
+  const cards = $("#cards"), wf = $("#wuFilter");
+  if (!ME.writeups.length) cards.innerHTML = '<p class="lede">Write-ups will appear here. Add entries to the writeups list in index.html.</p>';
+  else {
+    cards.innerHTML = ME.writeups.map(w => `
+      <a class="card" data-tag="${esc(w.tag)}" href="${esc(w.url)}" ${w.url.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>
+        <h3>${esc(w.title)}</h3><p>${esc(w.summary)}</p>
+        <div class="meta">${w.severity ? `<span class="sev">${esc(w.severity)}</span>` : ""}<span>${esc(w.tag)}</span>${w.sample ? '<span class="sample">Sample, replace me</span>' : ""}</div>
+      </a>`).join("");
+    const tags = ["All"].concat([...new Set(ME.writeups.map(w => w.tag))]);
+    tags.forEach((t, i) => {
+      const c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.textContent = t; c.setAttribute("aria-pressed", i === 0);
+      c.addEventListener("click", () => {
+        $$(".chip", wf).forEach(x => x.setAttribute("aria-pressed", x === c));
+        $$(".card", cards).forEach(card => card.classList.toggle("gone", t !== "All" && card.dataset.tag !== t));
+      });
+      wf.appendChild(c);
+    });
+    if (!reduce) $$(".card", cards).forEach(card => {
+      card.addEventListener("mousemove", e => {
+        const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+      });
+      card.addEventListener("mouseleave", () => card.style.transform = "");
+    });
+  }
+})();
+</script>
+</body>
+</html>
