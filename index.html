@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Muhammed Shameel NV | Penetration Testing & Mobile Security</title>
-<meta name="description" content="Muhammed Shameel NV is an Associate Penetration Tester at Wattlecorp Cybersecurity Labs, Calicut, with CEH v13 certification and a growing focus on mobile application security.">
-<meta property="og:title" content="Muhammed Shameel NV | Penetration Testing & Mobile Security">
-<meta property="og:description" content="Associate Penetration Tester at Wattlecorp Cybersecurity Labs, Calicut. CEH v13 certified; currently learning mobile application security.">
+<title>Muhammed Shameel NV | Associate Penetration Tester</title>
+<meta name="description" content="Associate penetration tester and security researcher focused on web application, API and network security.">
+<meta property="og:title" content="Muhammed Shameel NV | Associate Penetration Tester">
+<meta property="og:description" content="Web application, API and network security testing, plus independent security research.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312203A'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='%23FF7A59'%3EMS%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +103,23 @@ h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.7rem
 .hero .typed { animation-delay: .08s; } .hero .bio { animation-delay: .16s; } .hero .btn-row { animation-delay: .24s; } .hero .hint-line { animation-delay: .32s; } .portrait-wrap { animation-delay: .12s; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
-/* ---------- Sections ---------- */
+
+/* Temporary full-page celebration after a perfect game */
+.qc-win-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:rgba(5,10,18,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:qcFadeIn .25s ease both}
+.qc-win-overlay[hidden]{display:none}
+.qc-win-box{width:min(100%,460px);text-align:center;padding:clamp(28px,6vw,46px);border:1px solid var(--line,rgba(150,180,210,.3));border-radius:24px;background:var(--bg,#101722);color:var(--ink,#f3f6fb);box-shadow:0 24px 90px rgba(0,0,0,.38)}
+.qc-win-icon{width:62px;height:62px;display:grid;place-items:center;margin:0 auto 18px;border-radius:50%;background:var(--accent-soft,rgba(105,229,206,.13));border:1px solid var(--accent,#69e5ce);color:var(--accent,#69e5ce);font-size:30px;font-weight:800}
+.qc-win-kicker{margin:0 0 10px;font-size:10px;letter-spacing:.15em;font-weight:800;color:var(--accent,#69e5ce)}
+.qc-win-box h2{font-size:clamp(26px,6vw,36px);margin:0 0 12px}
+.qc-win-box>p:not(.qc-win-kicker){color:var(--muted,#9eafc3);line-height:1.7}
+.qc-win-score{font-size:44px;font-weight:850;letter-spacing:-.04em;margin:16px 0;color:var(--accent,#69e5ce)}
+.qc-win-score span{font-size:13px;letter-spacing:0;color:var(--muted,#9eafc3)}
+.qc-win-box .qc-win-closing{font-size:12px;margin:0 0 18px}
+#qc-win-close{min-height:44px;padding:11px 20px;border:0;border-radius:999px;background:var(--accent,#69e5ce);color:#08131a;font-weight:800;cursor:pointer}
+#qc-win-close:focus-visible{outline:3px solid var(--ink,#fff);outline-offset:4px}
+@keyframes qcFadeIn{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.qc-win-overlay{animation:none}}
+\n/* ---------- Sections ---------- */
 section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
 h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 4vw, 2.8rem); letter-spacing: -.025em; line-height: 1.05; margin: 0 0 .75rem; }
 .lede { color: var(--muted); max-width: 60ch; margin: 0 0 2rem; }
@@ -209,6 +225,23 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem
 .contact .btn.ghost { color: var(--bg); background: transparent; } .contact .btn.ghost:hover { background: var(--bg); color: var(--ink); }
 .contact .btn-row { flex-direction: column; align-items: stretch; }
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; align-items: start; } }
+/* ---------- Interactive security conversation ---------- */
+.contact { position: relative; overflow: hidden; isolation: isolate; }
+.contact::after { content: ""; position: absolute; width: 230px; height: 230px; right: 12%; top: -120px; border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent); border-radius: 50%; box-shadow: 0 0 0 24px color-mix(in srgb, var(--accent) 5%, transparent), 0 0 0 50px color-mix(in srgb, var(--accent) 4%, transparent); z-index: -1; animation: securityOrbit 18s linear infinite; pointer-events: none; }
+.contact-kicker { display:flex; align-items:center; gap:.6rem; color:var(--accent); font-size:.72rem; letter-spacing:.13em; font-weight:800; margin-bottom:1rem; }
+.contact-pulse { width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); animation:securityPulse 2s infinite; }
+.security-word { display:inline-block; color:var(--accent); transition:transform .25s; }
+.contact:hover .security-word { transform:translateX(4px); }
+.topic-picks { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem; }
+.topic-pick { display:inline-flex; align-items:center; gap:.8rem; border:1px solid color-mix(in srgb, var(--bg) 45%, transparent); border-radius:999px; background:transparent; color:inherit; padding:.55rem .8rem; font:inherit; font-size:.82rem; cursor:pointer; transition:transform .2s,background .2s,border-color .2s; }
+.topic-pick span { color:var(--accent); transition:transform .2s; }
+.topic-pick:hover,.topic-pick[aria-pressed="true"] { transform:translateY(-2px); background:color-mix(in srgb, var(--bg) 12%, transparent); border-color:var(--accent); }
+.topic-pick:hover span { transform:translate(2px,-2px); }
+.topic-response { min-height:1.5em; font-size:.85rem; opacity:.8; }
+@keyframes securityPulse { 70% { box-shadow:0 0 0 8px transparent; } 100% { box-shadow:0 0 0 0 transparent; } }
+@keyframes securityOrbit { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .contact::after,.contact-pulse { animation:none; } .topic-pick,.security-word { transition:none; } }
+
 footer { padding: 2rem 0 3rem; color: var(--muted); font-size: .92rem; }
 footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
@@ -218,7 +251,72 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
   .reveal { opacity: 1; transform: none; }
   #map .edge { stroke-dashoffset: 0; }
 }
+
+/* Subtle portfolio polish: professional motion, focus, and progress */
+:root { scroll-behavior: smooth; }
+::selection { background: rgba(92,235,209,.24); }
+a, button, .chip, .card { -webkit-tap-highlight-color: transparent; }
+button, a { transition: transform .18s ease, border-color .18s ease, background-color .18s ease, color .18s ease; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent, #5cebd1); outline-offset: 4px; }
+@media (hover:hover) and (pointer:fine) {
+  .btn:hover, .button:hover, button:hover { transform: translateY(-1px); }
+  a:not(.card):hover { text-decoration-thickness: 2px; }
+}
+#portfolio-progress {
+  position: fixed; top: 0; left: 0; width: 0%; height: 3px; z-index: 9999;
+  background: linear-gradient(90deg, #5cebd1, #77a9ff); box-shadow: 0 0 12px #5cebd155;
+  pointer-events: none;
+}
+#back-to-top {
+  position: fixed; right: 20px; bottom: 20px; z-index: 999;
+  width: 44px; height: 44px; border-radius: 14px; border: 1px solid var(--line, #26354b);
+  background: var(--panel, #101827); color: var(--text, #eaf1ff); font-size: 19px;
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  box-shadow: 0 8px 24px #0003;
+}
+#back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
 </style>
+
+<style>
+/* Small, restrained mini-game that matches the existing portfolio theme. */
+#security-quick-check{padding:clamp(34px,6vw,72px) 0}
+.quick-check-card{position:relative;display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(22px,4vw,46px);padding:clamp(22px,4vw,38px);border:1px solid var(--line,rgba(150,180,210,.22));border-radius:24px;overflow:hidden;background:linear-gradient(135deg,rgba(85,220,190,.075),transparent 45%),var(--card,rgba(15,24,38,.72))}
+.quick-check-card:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,var(--accent,#69e5ce),transparent);opacity:.8}
+.quick-check-copy,.quick-check-game{min-width:0;position:relative}
+.quick-check-kicker{font-size:11px;font-weight:750;letter-spacing:.13em;color:var(--accent,#69e5ce);text-transform:uppercase}
+.quick-check-copy h2{font-size:clamp(27px,3vw,38px);line-height:1.1;letter-spacing:-.04em;margin:13px 0}
+.quick-check-copy h2 span{color:var(--accent,#69e5ce)}
+.quick-check-copy>p{font-size:14px;line-height:1.8;color:var(--muted,#9eafc3);max-width:360px}
+.quick-check-stats{display:flex;gap:18px;margin-top:22px;font-size:10px;letter-spacing:.09em;color:var(--muted,#9eafc3)}
+.quick-check-stats b{font-size:17px;color:var(--text,#f3f6fb);letter-spacing:0;margin-right:3px}
+.quick-check-meter{height:4px;max-width:280px;background:rgba(140,160,180,.16);border-radius:10px;margin-top:12px;overflow:hidden}
+.quick-check-meter span{height:100%;width:0;display:block;background:var(--accent,#69e5ce);transition:width .3s ease}
+.quick-check-game{padding:clamp(17px,3vw,25px);border:1px solid var(--line,rgba(150,180,210,.22));border-radius:17px;background:rgba(4,10,19,.19)}
+.quick-check-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.quick-check-tag,.quick-check-status{font-size:9px;letter-spacing:.1em;font-weight:750;padding:6px 8px;border:1px solid var(--line,rgba(150,180,210,.22));border-radius:30px;color:var(--muted,#9eafc3)}
+.quick-check-status{color:var(--accent,#69e5ce)}
+.quick-check-game h3{font-size:17px;line-height:1.5;margin:17px 0}
+.quick-check-options{display:grid;gap:8px}
+.qc-option{width:100%;text-align:left;padding:11px 13px;border-radius:10px;border:1px solid var(--line,rgba(150,180,210,.22));background:transparent;color:var(--text,inherit);font:inherit;font-size:13px;line-height:1.5;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.qc-option:hover:not(:disabled){border-color:var(--accent,#69e5ce);transform:translateY(-1px)}
+.qc-option:focus-visible,.qc-next:focus-visible{outline:2px solid var(--accent,#69e5ce);outline-offset:3px}
+.qc-option:disabled{cursor:default;opacity:.86}
+.qc-option.is-correct{border-color:var(--accent,#69e5ce);background:rgba(85,220,190,.1)}
+.qc-option.is-wrong{border-color:#ef8290;background:rgba(239,130,144,.08)}
+.quick-check-feedback{min-height:38px;font-size:12px;line-height:1.7;color:var(--muted,#9eafc3);margin:12px 0 0}
+.quick-check-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.quick-check-hint{font-size:10px;color:var(--muted,#9eafc3)}
+.qc-next{border:1px solid var(--accent,#69e5ce);background:var(--accent,#69e5ce);color:#07151a;border-radius:9px;padding:10px 13px;font-weight:750;font-size:12px;cursor:pointer;min-height:40px}
+.qc-next:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:760px){.quick-check-card{grid-template-columns:1fr}.quick-check-copy>p{max-width:none}.quick-check-game{padding:16px}}
+@media(prefers-reduced-motion:reduce){.quick-check-meter span,.qc-option{transition:none}}
+</style>
+
 </head>
 
 <body>
@@ -253,7 +351,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
         <h1>Muhammed Shameel NV</h1>
         <p class="typed" id="typed" aria-label="Associate Penetration Tester">Associate Penetration Tester</p>
         <p class="bio">
-          I work in cybersecurity at Wattlecorp Cybersecurity Labs, Calicut. I hold the CEH v13 certification and am building my skills in web and API security, with a focused learning path into mobile application security. I value careful testing, clear reports, and learning by doing.
+          I test web applications, APIs and networks the way an attacker would, then write up what I find so
+          the fix is obvious. I also do independent security research, and I learn something new every week.
         </p>
         <div class="btn-row">
           <a class="btn primary magnet" href="#surface">Explore my skills</a>
@@ -261,17 +360,17 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.55h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.55 4.77 5.87V21h-4v-5.07c0-1.2-.02-2.76-1.75-2.76-1.75 0-2.02 1.32-2.02 2.67V21h-4z"/></svg>
             LinkedIn
           </a>
-          <a class="btn ghost magnet" data-link="github" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener noreferrer">
+          <a class="btn ghost magnet" data-link="github" href="https://github.com/Shameel-nv" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
             GitHub
           </a>
         </div>
-        <p class="hint-line">Ethical testing · Practical learning · Mobile security in focus</p>
+        <p class="hint-line">Move your mouse over the page. Click anywhere to send a ping.</p>
       </div>
 
       <div class="portrait-wrap">
         <figure class="portrait" id="portrait">
-          <img src="photo.jpeg" alt="Portrait of Muhammed Shameel NV" width="821" height="896" onerror="document.getElementById('portrait').classList.add('no-img')">
+          <img src="photo.jpg" alt="Portrait of Muhammed Shameel NV in a navy suit with arms crossed, smiling" width="821" height="896" onerror="document.getElementById('portrait').classList.add('no-img')">
           <span class="fallback" aria-hidden="true">MS</span>
           <span class="scanline" aria-hidden="true"></span>
           <figcaption class="focus-tag"><span class="dot"></span><span id="scanText">Hover to scan this target</span></figcaption>
@@ -283,8 +382,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
   <!-- ================= ATTACK SURFACE MAP ================= -->
   <section id="surface" aria-labelledby="surface-h">
     <div class="wrap">
-      <h2 id="surface-h">Security areas I’m exploring</h2>
-      <p class="lede">Explore the security topics I work with and the areas I’m actively learning. This map reflects my interests and learning path—not a claim of expertise in every topic.</p>
+      <h2 id="surface-h">My attack surface map</h2>
+      <p class="lede">Every node is something I test. Hover or tap a node to see what I look for. Use the filters to focus on one area.</p>
       <div class="map-box reveal">
         <div class="map-ctl" id="mapCtl" role="group" aria-label="Filter the map"></div>
         <svg id="map" viewBox="0 0 900 640" role="group" aria-label="Interactive map of my testing skills"></svg>
@@ -299,8 +398,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
   <!-- ================= TERMINAL ================= -->
   <section id="terminal" aria-labelledby="terminal-h">
     <div class="wrap">
-      <h2 id="terminal-h">Explore my security terminal</h2>
-      <p class="lede">An interactive, simulated terminal with a few commands to explore my profile, skills, and learning goals.</p>
+      <h2 id="terminal-h">Talk to my terminal</h2>
+      <p class="lede">A real command line, built into this page. Type a command or tap a shortcut.</p>
 
       <div class="challenge reveal">
         <div>
@@ -351,10 +450,37 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
   <!-- ================= WRITE-UPS ================= -->
   <section id="writeups" aria-labelledby="writeups-h">
     <div class="wrap">
-      <h2 id="writeups-h">Lab notes & write-ups</h2>
-      <p class="lede">A growing knowledge base. These cards are placeholders until I publish real, reproducible write-ups—no client details or confidential findings.</p>
+      <h2 id="writeups-h">Research and write-ups</h2>
+      <p class="lede">Findings, walkthroughs and notes from my research.</p>
       <div class="map-ctl" id="wuFilter" role="group" aria-label="Filter write-ups"></div>
       <div class="cards" id="cards"></div>
+    </div>
+  </section>
+
+
+  <!-- MINI GAME: a small, optional security break before contact -->
+  <section id="security-quick-check" aria-labelledby="quick-check-title">
+    <div class="wrap">
+      <div class="quick-check-card">
+        <div class="quick-check-copy">
+          <div class="quick-check-kicker"><span aria-hidden="true">✳</span> TAKE A 30-SECOND BREAK</div>
+          <h2 id="quick-check-title">Quick security <span>check.</span></h2>
+          <p>A tiny challenge for curious minds. Spot the safest move, collect a few points, and carry on exploring.</p>
+          <div class="quick-check-stats"><span><b id="qc-round">01</b> / 03 ROUND</span><span><b id="qc-score">0</b> XP</span></div>
+          <div class="quick-check-meter" aria-hidden="true"><span id="qc-progress"></span></div>
+        </div>
+        <div class="quick-check-game">
+          <div class="quick-check-top"><span class="quick-check-tag">SECURITY MINI-CHALLENGE</span><span class="quick-check-status" id="qc-status">READY</span></div>
+          <h3 id="qc-question">You receive an unexpected password-reset email. What should you do?</h3>
+          <div class="quick-check-options" id="qc-options">
+            <button type="button" class="qc-option" data-answer="0">Click its link immediately</button>
+            <button type="button" class="qc-option" data-answer="1">Visit the official site directly</button>
+            <button type="button" class="qc-option" data-answer="2">Reply with your current password</button>
+          </div>
+          <p class="quick-check-feedback" id="qc-feedback" aria-live="polite">Choose an answer to reveal the reasoning.</p>
+          <div class="quick-check-actions"><span class="quick-check-hint">No tricks. Just practical security habits.</span><button type="button" class="qc-next" id="qc-next" disabled>Next question →</button></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -363,13 +489,20 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
     <div class="wrap">
       <div class="contact reveal">
         <div>
-          <h2 id="contact-h">Let’s talk security.</h2>
-          <p>I’m interested in learning opportunities, mobile application security, responsible research, and conversations with the cybersecurity community.</p>
+          <div class="contact-kicker"><span class="contact-pulse" aria-hidden="true"></span> OPEN TO GOOD CONVERSATIONS</div>
+          <h2 id="contact-h">Let’s talk <span class="security-word">security.</span></h2>
+          <p>Curious about a finding, have a security idea, or want to collaborate? Pick a topic and let’s start there.</p>
+          <div class="topic-picks" role="group" aria-label="Choose a conversation topic">
+            <button class="topic-pick" type="button" data-topic="Web security">Web security <span>↗</span></button>
+            <button class="topic-pick" type="button" data-topic="Security research">Security research <span>↗</span></button>
+            <button class="topic-pick" type="button" data-topic="Collaboration">Collaboration <span>↗</span></button>
+          </div>
+          <p class="topic-response" id="topicResponse" aria-live="polite">Choose a topic above to personalize the conversation.</p>
         </div>
         <div class="btn-row">
-          <a class="btn primary magnet" data-link="linkedin" href="https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360" target="_blank" rel="noopener noreferrer">Message me on LinkedIn</a>
+          <a class="btn primary magnet" id="linkedinContact" data-link="linkedin" href="https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360" target="_blank" rel="noopener noreferrer">Message me on LinkedIn <span aria-hidden="true">↗</span></a>
           <a class="btn ghost magnet" id="emailBtn" href="#" hidden>Send an email</a>
-          <a class="btn ghost magnet" data-link="github" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener noreferrer">See my GitHub</a>
+          <a class="btn ghost magnet" data-link="github" href="https://github.com/Shameel-nv" target="_blank" rel="noopener noreferrer">See my GitHub</a>
         </div>
       </div>
     </div>
@@ -379,7 +512,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
 <footer>
   <div class="wrap">
     <span>&copy; <span id="year"></span> Muhammed Shameel NV</span>
-    <span>CEH v13 · Wattlecorp Cybersecurity Labs, Calicut · Mobile security learning journey</span>
+    <span>Hand-written HTML. No trackers, no frameworks.</span>
   </div>
 </footer>
 
@@ -390,41 +523,38 @@ footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wr
 const ME = {
   name: "Muhammed Shameel NV",
   linkedin: "https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360",
-  github: "https://github.com/YOUR-USERNAME",   // TODO: replace with your actual GitHub profile URL
+  github: "https://github.com/Shameel-nv",   // EDIT: your GitHub profile
   email: "",                                     // EDIT: "you@example.com" (empty hides the email buttons)
   passphrase: "hire-shameel",                    // the CTF answer (visitors must base64-decode it)
 
-  roles: ["Associate Penetration Tester", "CEH v13 Certified", "Mobile Application Security Learner", "Web & API Security", "Always learning"],
+  roles: ["Associate Penetration Tester", "Web Application Security", "API Security Researcher", "Network Security Tester", "Always learning"],
 
   // EDIT: honest progress, 0-100
   learning: [
-    { topic: "Mobile application security fundamentals", progress: 30 },
-    { topic: "Android app assessment and testing workflow", progress: 25 },
-    { topic: "Web and API security testing", progress: 50 },
-    { topic: "Mobile traffic analysis and proxying", progress: 20 }
+    { topic: "Advanced API attacks (BOLA chains, mass assignment)", progress: 60 },
+    { topic: "Active Directory fundamentals", progress: 35 },
+    { topic: "Cloud security basics", progress: 25 }
   ],
 
   // EDIT: the tools you actually use
   tools: {
-    "Web and API security": ["Burp Suite", "OWASP ZAP", "Postman"],
-    "Mobile security — learning": ["Android security concepts", "APK analysis fundamentals", "Proxy-based traffic inspection"],
-    "Core foundations": ["Linux", "Networking", "Python basics"]
+    "Web and API": ["Burp Suite", "OWASP ZAP", "Postman", "ffuf", "sqlmap"],
+    "Network": ["Nmap", "Wireshark", "Metasploit", "Nessus"],
+    "Scripting": ["Python", "Bash", "Linux"]
   },
 
-  // Journey is shown in reverse chronological order. Add dates when you want to include them.
+  // EDIT: your real story
   journey: [
-    { when: "Current", title: "Wattlecorp Cybersecurity Labs · Calicut", text: "Currently working at Wattlecorp Cybersecurity Labs, building practical experience in cybersecurity and penetration testing." },
-    { when: "Certification", title: "Certified Ethical Hacker (CEH v13)", text: "Earned the CEH v13 certification as part of my cybersecurity learning and professional development." },
-    { when: "Certification", title: "Certified Penetration Tester · Redteam Hacking Academy", text: "Completed training at Redteam Hacking Academy and earned the Certified Penetration Tester certificate." },
-    { when: "Education", title: "B.Sc. Computer Science · JDT College of Arts and Science, Calicut", text: "Studied Computer Science, building the academic foundation for my path into cybersecurity." },
-    { when: "Learning focus", title: "Mobile Application Security", text: "Currently focused on learning mobile application security, especially Android app testing, alongside web and API security. Mobile security is my learning goal—not a claim of established expertise." }
+    { when: "Today", title: "Associate Penetration Tester", text: "Testing web applications, APIs and networks, and writing findings that developers can act on." },
+    { when: "Along the way", title: "Security researcher", text: "Digging into how systems fail, from authentication flaws to misconfigured services." },
+    { when: "Always", title: "Still learning", text: "Picking up a new technique every week and practising it in labs before using it on real work." }
   ],
 
   // EDIT: replace the samples with your real write-ups. Delete `sample: true` once real.
   writeups: [
-    { title: "Mobile security lab notes", summary: "A place for future notes on Android app structure, permissions, exported components, and secure storage. Publish only after completing the lab and writing your own findings.", tag: "Mobile", severity: "", url: "#", sample: true },
-    { title: "Web application security notes", summary: "A future write-up area for authorized practice labs, including the issue, evidence, impact, and remediation.", tag: "Web", severity: "", url: "#", sample: true },
-    { title: "API security lab notes", summary: "A future space for documenting API testing methodology and fixes from authorized labs.", tag: "API", severity: "", url: "#", sample: true }
+    { title: "Your first write-up title", summary: "Two sentences on what you found, how you found it and what the fix was.", tag: "Web", severity: "High", url: "#", sample: true },
+    { title: "An API finding or lab walkthrough", summary: "A short walkthrough of the issue, the request that proved it and how to fix it.", tag: "API", severity: "Medium", url: "#", sample: true },
+    { title: "A network lab or CTF walkthrough", summary: "The key steps, the tools you used and what you learned.", tag: "Network", severity: "", url: "#", sample: true }
   ],
 
   // Skill map. Edit names and notes freely.
@@ -445,13 +575,13 @@ const ME = {
       ["Rate limiting", "Testing login, OTP and search endpoints for brute force, enumeration and resource exhaustion."],
       ["Shadow endpoints", "Finding old versions and undocumented routes that skipped the security fixes applied to the current API."]
     ]},
-    { id: "mobile", label: "Mobile", skills: [
-      ["App permissions", "Learning to review Android permissions and assess whether access requested by an app is justified."],
-      ["Local data storage", "Studying how apps store sensitive data and how to identify insecure storage in authorized test apps."],
-      ["Network traffic", "Learning to inspect mobile app traffic through a proxy in a controlled lab and understand TLS protections."],
-      ["App components", "Exploring Android activities, services, receivers, and providers for unsafe exposure or configuration."],
-      ["APK analysis", "Building familiarity with APK structure, manifests, resources, and static-analysis workflows."],
-      ["Mobile OWASP risks", "Studying common mobile application risks and mapping lab observations to practical remediation advice."]
+    { id: "network", label: "Network", skills: [
+      ["Scanning", "Finding live hosts and open ports, then deciding which services deserve a closer look."],
+      ["Enumeration", "Identifying versions, banners and configurations to match services against known weaknesses."],
+      ["Weak credentials", "Checking management panels, databases and network devices for credentials that were never changed."],
+      ["Misconfigurations", "Open shares, anonymous access, exposed SNMP and legacy protocols that should have been turned off."],
+      ["TLS review", "Outdated protocol versions, weak ciphers and certificate problems that expose traffic."],
+      ["Segmentation", "Confirming that a foothold in one zone cannot freely reach sensitive systems in another."]
     ]}
   ]
 };
@@ -691,7 +821,7 @@ const ME = {
   const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t || u)}</a>`;
 
   const files = {
-    "about.txt": () => ["Muhammed Shameel NV — Associate Penetration Tester.", "CEH v13 certified; currently at Wattlecorp Cybersecurity Labs, Calicut.", "Current learning focus: mobile application security, alongside web and API security."],
+    "about.txt": () => ["Muhammed Shameel NV, associate penetration tester and security researcher.", "I test web applications, APIs and networks, and I keep learning new techniques every week."],
     "skills.txt": () => ME.areas.map(a => `<span class="hot">${esc(a.label)}</span>: ${esc(a.skills.map(s => s[0]).join(", "))}`),
     "contact.txt": () => contactLines()
   };
@@ -854,5 +984,163 @@ const ME = {
   }
 })();
 </script>
-</body>
+
+<script>
+/* Lightweight quality-of-life interactions; original portfolio features remain intact. */
+(() => {
+  if (document.getElementById('portfolio-progress')) return;
+  const progress = document.createElement('div');
+  progress.id = 'portfolio-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progress);
+
+  const top = document.createElement('button');
+  top.id = 'back-to-top';
+  top.type = 'button';
+  top.textContent = '↑';
+  top.setAttribute('aria-label', 'Back to top');
+  top.title = 'Back to top';
+  document.body.appendChild(top);
+  top.addEventListener('click', () => window.scrollTo({
+    top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  }));
+
+  let queued = false;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = Math.max(0, Math.min(100, percent)) + '%';
+    top.classList.toggle('visible', window.scrollY > 420);
+    queued = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!queued) { queued = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* Contact topic selector: updates the prompt and LinkedIn message context. */
+(() => {
+  const picks = document.querySelectorAll('.topic-pick');
+  const response = document.getElementById('topicResponse');
+  const linkedin = document.getElementById('linkedinContact');
+  if (!picks.length || !response || !linkedin) return;
+  const messages = {
+    'Web security': 'Let’s talk about web security, testing methodology, and practical ways to improve application security.',
+    'Security research': 'Let’s compare research ideas, findings, and useful lessons from security work.',
+    'Collaboration': 'Let’s explore a collaboration, knowledge sharing, or a cybersecurity opportunity.'
+  };
+  picks.forEach((button) => button.addEventListener('click', () => {
+    const topic = button.dataset.topic;
+    picks.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+    response.textContent = messages[topic] || 'Let’s talk security.';
+    linkedin.href = 'https://www.linkedin.com/in/muhammed-shameel-nv-6b0b1b360';
+    linkedin.setAttribute('aria-label', 'Open LinkedIn to start a conversation about ' + topic);
+    linkedin.innerHTML = 'Message me on LinkedIn <span aria-hidden="true">↗</span>';
+  }));
+})();
+
+/* Security quick-check mini-game: local-only, no tracking or network requests. */
+(() => {
+  const root = document.getElementById('security-quick-check');
+  if (!root || root.dataset.initialized) return;
+  root.dataset.initialized = 'true';
+  const $ = (selector) => root.querySelector(selector);
+  const questions = [
+    {q:'You receive an unexpected password-reset email. What should you do?',a:['Click its link immediately','Visit the official site directly','Reply with your current password'],correct:1,why:'Correct. Use the official site or app directly, and report suspicious messages when appropriate.'},
+    {q:'A login alert appears while you are not signing in. What is the best next step?',a:['Ignore it every time','Share the alert screenshot publicly','Secure the account through its official settings and review activity'],correct:2,why:'Correct. Use the official account recovery/security flow, review sessions, and change credentials if needed.'},
+    {q:'An app requests access to data it does not seem to need. What should you do?',a:['Review the permission and deny it if unnecessary','Grant everything to continue faster','Assume every request is safe'],correct:0,why:'Correct. Check whether the permission fits the feature and choose the least access needed.'}
+  ];
+  let round = 0, score = 0, answered = false, finished = false;
+  const question = $('#qc-question'), options = $('#qc-options'), feedback = $('#qc-feedback');
+  function render() {
+    answered = false;
+    finished = false;
+    const item = questions[round];
+    $('#qc-round').textContent = String(round + 1).padStart(2,'0');
+    $('#qc-score').textContent = String(score);
+    $('#qc-progress').style.width = (round / questions.length * 100) + '%';
+    $('#qc-status').textContent = 'ROUND ' + (round + 1);
+    question.textContent = item.q;
+    feedback.textContent = 'Choose an answer to reveal the reasoning.';
+    $('#qc-next').disabled = true;
+    $('#qc-next').textContent = round === questions.length - 1 ? 'Finish challenge →' : 'Next question →';
+    options.replaceChildren();
+    item.a.forEach((label, index) => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'qc-option'; button.dataset.answer = String(index);
+      button.textContent = label;
+      button.addEventListener('click', () => {
+        if (answered || finished) return;
+        answered = true;
+        const correct = index === item.correct;
+        if (correct) score += 10;
+        options.querySelectorAll('button').forEach((choice, i) => {
+          choice.disabled = true;
+          if (i === item.correct) choice.classList.add('is-correct');
+        });
+        if (!correct) button.classList.add('is-wrong');
+        $('#qc-score').textContent = String(score);
+        $('#qc-status').textContent = correct ? 'CORRECT' : 'REVIEW';
+        feedback.textContent = (correct ? '+10 points. ' : 'Not quite. ') + item.why;
+        $('#qc-next').disabled = false;
+      });
+      options.append(button);
+    });
+  }
+  const winOverlay = document.getElementById('qc-win-overlay');
+  const closeWin = document.getElementById('qc-win-close');
+  let winTimer;
+  function dismissWin() {
+    winOverlay.hidden = true;
+    if (winTimer) clearTimeout(winTimer);
+    round = 0; score = 0; render();
+    $('#qc-status').textContent = 'READY';
+    feedback.textContent = 'Ready for another try whenever you are.';
+  }
+  closeWin.addEventListener('click', dismissWin);
+  $('#qc-next').addEventListener('click', () => {
+    if (!answered && !finished) return;
+    if (round === questions.length - 1) {
+      if (score === questions.length * 10) {
+        winOverlay.hidden = false;
+        closeWin.focus();
+        winTimer = setTimeout(dismissWin, 5000);
+      } else {
+        $('#qc-status').textContent = 'CHALLENGE COMPLETE';
+        feedback.textContent = 'You scored ' + score + ' / 30 XP. Try again for a perfect score!';
+        $('#qc-next').textContent = 'Try again →';
+        finished = true;
+        $('#qc-next').disabled = false;
+        $('#qc-next').onclick = () => {
+          round = 0; score = 0; render();
+          $('#qc-status').textContent = 'READY';
+          feedback.textContent = 'New round started. See if you can earn all 30 points.';
+          $('#qc-next').onclick = null;
+        };
+      }
+      return;
+    }
+    round++;
+    render();
+  });
+  render();
+})();
+
+</script>
+
+
+<div class="qc-win-overlay" id="qc-win-overlay" role="dialog" aria-modal="true" aria-labelledby="qc-win-title" aria-describedby="qc-win-desc" hidden>
+  <div class="qc-win-box">
+    <div class="qc-win-icon" aria-hidden="true">✓</div>
+    <p class="qc-win-kicker">SECURITY CHALLENGE COMPLETE</p>
+    <h2 id="qc-win-title">Congrats, security pro!</h2>
+    <p id="qc-win-desc">You got every answer right. Great instincts — keep them sharp.</p>
+    <div class="qc-win-score">30 <span>/ 30 XP</span></div>
+    <p class="qc-win-closing">Back to exploring the portfolio in a moment…</p>
+    <button type="button" id="qc-win-close">Continue exploring</button>
+  </div>
+</div>
+\n</body>
 </html>
